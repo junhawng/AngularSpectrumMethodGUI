@@ -91,7 +91,7 @@ class StartPage(tk.Frame):
         return (int(B), int(G), int(R))
     def fileSelector(self):
         global file
-        file = filedialog.askopenfilename(initialdir = '/Users/junju/OneDrive/School/Homework/Year 2/Semester 2/ESE 438/HW6', title = 'Select Mask Image')
+        file = filedialog.askopenfilename(initialdir = '/Users/junju/OneDrive/School/Homework/Year 2/Semester 2/ESE 438/AngularSpectrumMethodGUI/Input Images/', title = 'Select Mask Image')
     def updateText(self):
         label2.config(text = "File Loaded. Proceed with analysis")
     def processImage(self):
@@ -135,12 +135,12 @@ class StartPage(tk.Frame):
             for j in range(pixWidthY):
                 for k in range(0, 3):
                     colorFormatIntensity[i][j][k] = colorRGB[k] *colorFormatIntensity[i][j][k]/255
-        cv2.imwrite('/Users/junju/OneDrive/School/Homework/Year 2/Semester 2/ESE 438/HW6/new.png', colorFormatIntensity )
+        cv2.imwrite('/Users/junju/OneDrive/School/Homework/Year 2/Semester 2/ESE 438/AngularSpectrumMethodGUI/Output Images/new.png', colorFormatIntensity )
 
     def updateImage(self):
         global canvas, img
         label2.config(text = "Simulation Complete!")
-        img = ImageTk.PhotoImage(Image.open('/Users/junju/OneDrive/School/Homework/Year 2/Semester 2/ESE 438/HW6/new.png').resize((512,512), Image.ANTIALIAS))
+        img = ImageTk.PhotoImage(Image.open('/Users/junju/OneDrive/School/Homework/Year 2/Semester 2/ESE 438/AngularSpectrumMethodGUI/Output Images/new.png').resize((512,512), Image.ANTIALIAS))
         canvas.create_image(0, 0, anchor= 'nw',image = img)
         canvas.update()
     def focus_next_widget(self, event):
@@ -170,7 +170,7 @@ class StartPage(tk.Frame):
         button2 = ttk.Button(self, text ="Run Image",command = lambda : [self.processImage(), self.updateImage()])
 
         button2.grid(row = 3, column = 2)
-        lamLabel = ttk.Label(self, text = "Wavelength (nm)").grid(row = 4, column = 0)
+        lamLabel = ttk.Label(self, text = "Wavelength (nm) [380 - 750]").grid(row = 4, column = 0)
         gainLabel = ttk.Label(self, text = "Gain (Default .05)").grid(row = 4, column = 1)
         zLabel = tk.Label(self, text = "Distance Z from source (cm)").grid(row = 4, column = 2)
 
