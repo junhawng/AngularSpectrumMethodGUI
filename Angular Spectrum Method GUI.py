@@ -18,7 +18,7 @@ class tkinterApp(tk.Tk):
         # __init__ function for class Tk
         tk.Tk.__init__(self, *args, **kwargs)
         
-        self.geometry('1000x700')
+        self.geometry('1050x700')
         # creating a container
         container = tk.Frame(self) 
         container.pack(side = "top", fill = "both", expand = True)
@@ -130,11 +130,9 @@ class StartPage(tk.Frame):
         intensity = np.real(newM * np.conjugate(newM)) * gain
         intensity = np.array(intensity, dtype = np.float32)
         colorFormatIntensity = cv2.cvtColor(intensity ,cv2.COLOR_GRAY2RGB)
-
-        for i in range(pixWidthX):
-            for j in range(pixWidthY):
-                for k in range(0, 3):
-                    colorFormatIntensity[i][j][k] = colorRGB[k] *colorFormatIntensity[i][j][k]/255
+        print(colorFormatIntensity.shape)
+        for i in range (0, 3):
+            colorFormatIntensity[:, :, i] = colorFormatIntensity[:,:,i]/255 * colorRGB[i]
         cv2.imwrite('/Users/junju/OneDrive/School/Homework/Year 2/Semester 2/ESE 438/AngularSpectrumMethodGUI/Output Images/new.png', colorFormatIntensity )
 
     def updateImage(self):
